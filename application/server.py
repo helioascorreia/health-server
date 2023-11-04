@@ -1,8 +1,10 @@
-from sanic import Sanic
 from sanic.response import text
+from sanic import Sanic
+
+from utilities.app_factory import create_app
 
 
-app = Sanic("Health")
+app = create_app()
 
 
 @app.get("/")
