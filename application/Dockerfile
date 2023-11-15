@@ -1,4 +1,4 @@
-FROM python:bookworm
+FROM python:3.12-bookworm
 
 # Prevents Python from writing pyc files.
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -41,8 +41,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 USER appuser
 
 # Expose the port that the application listens on.
-EXPOSE 8000
+EXPOSE 5000
 
 COPY . .
 
-CMD [ "sanic" "server:app" "--host=0.0.0.0" "--port=8000" "--workers=2" ]
+WORKDIR /app/application
+
+CMD [ "sanic" "server:app" "--host=0.0.0.0" "--port=5000" "--workers=2" ]
