@@ -1,3 +1,4 @@
+from pydantic import ValidationError
 import strawberry
 
 from .types import Measurement
@@ -14,7 +15,10 @@ class Query:
 
     @strawberry.field
     async def measurement(self, id: str) -> Measurement:
-        instance = await MeasurementModel.get(id)
+        try:
+            instance = await MeasurementModel.get(id)
+        except ValidationError as _:
+            instance = None
 
         if instance is None:
             raise Exception("Not found")
