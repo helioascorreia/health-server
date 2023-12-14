@@ -3,7 +3,7 @@ from strawberry.schema.name_converter import NameConverter
 
 class PythonConverter(NameConverter):
     """
-    This converter handles the python convertion of when we have reserved words
+    This converter handles the python conversion of when we have reserved words
     we add an underscore in the end of the name Ex: input_
     """
 
