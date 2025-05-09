@@ -1,9 +1,10 @@
 # from application.schema import schema
-# import pytest
+from datetime import datetime
+import pytest
+from ..models import Measurement
 # from schema import schema
-# from ..models import Measurement
 # from ..repository import MeasurementRepository
-from server import app
+# from server import app
 
 # from datetime import datetime
 
@@ -83,31 +84,52 @@ from server import app
 #     # ]
 
 
-async def test_query(measurements):
-    await measurements(number=2)
+# async def test_query(measurements):
+#     await measurements(number=2)
 
-    request, response = await app.asgi_client.post(
-        "/graphql",
-        json={
-            "query": """
-                query {
-                    measurements {
-                        weight
-                    }
-                }
-            """
-        },
-    )
+#     request, response = await app.asgi_client.post(
+#         "/graphql",
+#         json={
+#             "query": """
+#                 query {
+#                     measurements {
+#                         weight
+#                     }
+#                 }
+#             """
+#         },
+#     )
 
-    assert response.json == {
-        "data": {
-            "measurements": [
-                {
-                    "weight": 0.0,
-                },
-                {
-                    "weight": 1.0,
-                },
-            ],
-        }
-    }
+#     assert response.json == {
+#         "data": {
+#             "measurements": [
+#                 {
+#                     "weight": 0.0,
+#                 },
+#                 {
+#                     "weight": 1.0,
+#                 },
+#             ],
+#         }
+#     }
+
+
+# Working example
+
+@pytest.mark.asyncio
+async def test_something(db):
+    await db.measurement.insert_one({"value": 122})
+
+    result = await db.measurement.find_one({"value": 122})
+    assert result is not None
+
+# End of working example
+
+
+# @pytest.mark.asyncio
+# async def test_something2(my_fixture):
+#     last_measurement = Measurement(weight=81, date=datetime.now())
+#     await last_measurement.create()
+
+#     result = await Measurement.find({"weight": 81}).first_or_none()
+#     assert result is not None

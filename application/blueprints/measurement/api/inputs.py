@@ -39,4 +39,5 @@ class MeasurementCreateInput(MeasurementInput):
 
 @strawberry.input
 class MeasurementUpdateInput(MeasurementInput):
+    id: strawberry.ID
     weight: Optional[float] = strawberry.UNSET
