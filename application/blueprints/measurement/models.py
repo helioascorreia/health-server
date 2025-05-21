@@ -1,9 +1,12 @@
-from typing import Optional
+from typing import Optional, Annotated
 from datetime import datetime
-from beanie import Document
+from pydantic import BaseModel, BeforeValidator, Field
+
+PyObjectId = Annotated[str, BeforeValidator(str)]
 
 
-class Measurement(Document):
+class Measurement(BaseModel):
+    id: Optional[PyObjectId] = Field(alias="_id", default=None)
     date: datetime
     weight: float
 
@@ -30,6 +33,3 @@ class Measurement(Document):
     visceral_fat: Optional[int] = None
     body_watter: Optional[float] = None
     diary_calorie_intake: Optional[int] = None
-
-    class Settings:
-        name = "measurement"

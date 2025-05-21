@@ -1,4 +1,8 @@
-beanie==1.23.3
 pydantic==2.4.2
-sanic==23.6
-strawberry-graphql==0.211.1
+sanic==25.3
+strawberry-graphql==0.270.0
+motor==3.7.1
+
+pytest==7.4.3
+pytest-asyncio==0.21.1
+sanic-testing==24.6.0

@@ -3,7 +3,6 @@ from types import ModuleType
 from inspect import getmembers
 from typing import Union
 
-
 from sanic.blueprints import Blueprint
 
 

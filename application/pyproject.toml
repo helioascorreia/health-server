@@ -8,3 +8,11 @@ multi_line_output = 5
 combine_as_imports = true
 include_trailing_comma = true
 line_length = 120
+
+[tool.pytest.ini_options]
+asyncio_mode = 'auto'
+# ilterwarnings = [
+#     "error",
+#     "ignore::DeprecationWarning",
+#     "ignore::UserWarning",
+# ]
