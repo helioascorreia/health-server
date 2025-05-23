@@ -26,6 +26,14 @@ services:
       - ${MONGO_PORT:-27017}:27017
     volumes:
       - mongodb_data_container:/data/db
-
+  
+  mongo-testing:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
+    ports:
+      - ${MONGO_PORT:-27018}:27017
+    
 volumes:
   mongodb_data_container:
