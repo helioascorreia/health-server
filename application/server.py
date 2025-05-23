@@ -10,6 +10,6 @@ app = create_app(init_blueprints=[
 ])
 
 app.add_route(
-    GraphQLView.as_view(schema=schema, graphiql=True),
+    GraphQLView.as_view(schema=schema, graphql_ide=True),
     "/graphql",
 )
