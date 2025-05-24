@@ -1,7 +1,8 @@
 from sanic import Sanic
-from pymongo import MongoClient
-from schema import schema
-import os
+
+from .models import Measurement
+from datetime import datetime
+
 
 def test_sample(app: Sanic):
     request, response = app.test_client.get("/graphql")
@@ -21,15 +22,15 @@ async def test_query(test_client):
             }
         }
     """
-    db = MongoClient("mongodb://root:rootpassword@mongo-testing:27017")["health_test"]
-    db.measurements.insert_one({"id": "abc123", "weight": 70.5})
+
+    await test_client.sanic_app.ctx.mongo_db.measurements.insert_one(
+        Measurement(date=datetime.now(), weight=70.5).model_dump()
+    )
 
     _, response = await test_client.post("/graphql", json={"query": query})
     response_json = response.json
     
-    # assert response.errors is None
     assert response_json["data"]["measurements"] == [
-        {"weight": 81},
-        {"weight": 80},
+        {"weight": 70.5},
     ]
   
